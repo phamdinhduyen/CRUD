@@ -14,6 +14,7 @@ $products = $this->data;
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
     <script>
+    var page = 1
     $(document).ready(function() {
         $(".deleteProduct").click(function(e) {
             console.log("aaa");
@@ -25,10 +26,10 @@ $products = $this->data;
 
 
         $("#show_more").click(function(e) {
-
+            page = page + 1
             e.preventDefault()
-            $.get("http://localhost/User/product?page=2", {
-                    page: 2
+            $.get("http://localhost/User/product", {
+                    page: page
                 },
                 function(data) {
                     const products = JSON.parse(data);
@@ -62,7 +63,8 @@ $products = $this->data;
 
 <body>
     <div class="container">
-        <h2>Basic Table</h2>
+        <h2>Create Product </h2>
+        <button> <a href="http://localhost/User/product/create">Create</a></button>
         <p>The .table class adds basic styling (light padding and only horizontal dividers) to a table:</p>
         <table class="table">
             <thead>

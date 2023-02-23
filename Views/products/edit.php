@@ -62,7 +62,7 @@ $product = $this->data;
 
 <body>
 
-    <div class="container">
+    <div style="width:500px; margin-left:50px; margin-top:30px">
         <form action="http://localhost/User/product/update" method="POST" id="form_edit_product">
             <div class="form-group" style="display:none">
                 <label for="tensp">Ten SP:</label>
