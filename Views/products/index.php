@@ -23,30 +23,38 @@ $products = $this->data;
             return false;
         })
 
+
         $("#show_more").click(function(e) {
+
             e.preventDefault()
-            $.get("http://localhost/User/product?page=2"), {
+            $.get("http://localhost/User/product?page=2", {
                     page: 2
                 },
                 function(data) {
                     const products = JSON.parse(data);
-                    const htmlProduct = '';
+                    let htmlProduct = '';
                     products.forEach(product => {
                         htmlProduct += `
-                        <tr>
-                        <td>${product.name}</td>
-                        <td>${product.name}</td>
-                        <td>${product.name}</td>
+                    <tr>
+                        <td>${product.ten_sp}</td>
+                        <td>${product.ngay_sx}</td>
+                        <td>${product.ma_sp}</td>
                         <td>
-                            <a href="http://localhost/User/product/edit?id=${product.id}"> Sua</a>
-                            <a class="delete"
-                                href="http://localhost/User/product/delete?id=${product.id}">Xoa</a>
+                            <button style="background: blue;">
+                                <a style="color:black"
+                                    href="http://localhost/User/product/edit?id= ${product["id"]}">
+                                    Edit</a>
+                            </button>
+                            <button style="background: red;">
+                                <a class="deleteProduct" style="color:black"
+                                    href="http://localhost/User/product/delete?id=${product["id"]}">Delete</a>
+                            </button>
                         </td>
-                        </tr>
-                        `
-                    })
-                    $('#tblProduct').append(htmlProduct);
-                }
+                    </tr>
+                `
+                    });
+                    $("#tblProduct").append(htmlProduct);
+                })
         })
     })
     </script>
@@ -66,7 +74,7 @@ $products = $this->data;
                 </tr>
             </thead>
             <div>
-                <tbody>
+                <tbody id="tblProduct">
                     <?php
                 foreach ($products as $product) {    ?>
                     <tr>
@@ -74,9 +82,15 @@ $products = $this->data;
                         <td><?php echo $product["ngay_sx"] ?></td>
                         <td><?php echo $product["ma_sp"] ?></td>
                         <td>
-                            <a href="http://localhost/User/product/edit?id=<?php echo $product["id"]?>"> Sua</a>
-                            <a class="deleteProduct"
-                                href="http://localhost/User/product/delete?id=<?php echo $product["id"]?>">Xoa</a>
+                            <button style="background: blue;">
+                                <a style="color:black"
+                                    href="http://localhost/User/product/edit?id=<?php echo $product["id"]?>">
+                                    Edit</a>
+                            </button>
+                            <button style="background: red;">
+                                <a class="deleteProduct" style="color:black"
+                                    href="http://localhost/User/product/delete?id=<?php echo $product["id"]?>">Delete</a>
+                            </button>
                         </td>
                     </tr>
                     <?php }?>
@@ -84,8 +98,7 @@ $products = $this->data;
                 </tbody>
             </div>
         </table>
-        <div id="tblProduct">....................</div>
-        <div id="show_more"> Show_more</div>
+        <div style="text-align:center; color: green" id="show_more"> Show_more</div>
 
     </div>
 
